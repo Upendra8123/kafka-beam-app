@@ -27,18 +27,21 @@ def process_message(message):
         print("Failed to decode JSON message:", message)
 
 
-def persist_to_file(payload):
-    with open('processed_messages.txt', 'a') as f:
+def persist_to_file(payload, filename):
+    """Persist message to a specific file based on age parity."""
+    with open(filename, 'a') as f:
         f.write(json.dumps(payload) + '\n')
 
 def publish_message(is_even_age, payload):
+    """Publish message to Kafka and persist to a file."""
     topic = 'EVEN_TOPIC' if is_even_age else 'ODD_TOPIC'
     producer.produce(topic, json.dumps(payload).encode('utf-8'))
     producer.flush()
     print(f"Published to {topic}: {payload}")
 
-    # Persist the message to file
-    persist_to_file(payload)
+    # Persist to the appropriate file
+    filename = 'even_age.txt' if is_even_age else 'odd_age.txt'
+    persist_to_file(payload, filename)
 
 
 def consume_messages():
