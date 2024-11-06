@@ -1,0 +1,10 @@
+{
+  "consumer": {
+    "bootstrap.servers": "localhost:9092",
+    "group.id": "age-processor-group",
+    "auto.offset.reset": "earliest"
+  },
+  "producer": {
+    "bootstrap.servers": "localhost:9092"
+  }
+}

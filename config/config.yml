@@ -1,0 +1,5 @@
+kafka:
+  broker: 'localhost:9092'
+  input_topic: 'INPUT_TOPIC'
+  even_topic: 'EVEN_TOPIC'
+  odd_topic: 'ODD_TOPIC'
